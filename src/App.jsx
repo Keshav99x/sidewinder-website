@@ -5,28 +5,15 @@ import { getFirestore, collection, onSnapshot, addDoc, doc, updateDoc, deleteDoc
 import { getStorage, ref, uploadBytes, getDownloadURL, listAll, deleteObject } from 'firebase/storage';
 
 // --- Helper Functions & Configuration ---
-
-// --- IMPORTANT ---
-// PASTE YOUR FIREBASE CONFIGURATION OBJECT HERE
-// This is for local development. For a live website, you should use
-// environment variables to keep your keys secure.
-// You can find this object in your Firebase project settings.
-const firebaseConfig = {
-  apiKey: "AIzaSyATNakDbggswP_Q_4D5ek5OdwYnaT-n1hE",
-  authDomain: "sidewinder-bot-website.firebaseapp.com",
-  projectId: "sidewinder-bot-website",
-  storageBucket: "sidewinder-bot-website.firebasestorage.app",
-  messagingSenderId: "372150758157",
-  appId: "1:372150758157:web:67fb1898fe5a8276d09e44",
-
-};
-// --- END OF CONFIGURATION ---
+// This now securely reads the Firebase config from your local .env.local file
+// or from the deployment environment's variables on Vercel.
+const firebaseConfigString = import.meta.env.VITE_FIREBASE_CONFIG || (typeof __firebase_config !== 'undefined' ? __firebase_config : '{}');
+const firebaseConfig = JSON.parse(firebaseConfigString);
 
 
 const appId = typeof __app_id !== 'undefined' ? __app_id : 'default-app-id';
 
 // --- Firebase Initialization ---
-// This will throw an error until you paste your config above.
 const app = initializeApp(firebaseConfig);
 const auth = getAuth(app);
 const db = getFirestore(app);
@@ -235,11 +222,11 @@ const GalleryPage = () => {
         { id: 4, src: '/images/sdOriginal.jpg', alt: '' },
         { id: 5, src: '/images/sdPre-matchBPGC.jpg', alt: '' },
         { id: 6, src: '/images/sdPost-match-BPGC.jpg', alt: '' },
-        { id: 6, src: '/images/p4.png', alt: '' },
-        { id: 6, src: '/images/sd1.png', alt: '' },
-        { id: 6, src: '/images/sd2.png', alt: '' },
+        { id: 7, src: '/images/p4.png', alt: '' },
+        { id: 8, src: '/images/sd1.png', alt: '' },
+        { id: 9, src: '/images/sd2.png', alt: '' },
         // Add more images here, for example:
-        // { id: 7, src: '/images/my-new-photo.jpg', alt: 'A description of my new photo' },
+        // { id: 10, src: '/images/my-new-photo.jpg', alt: 'A description of my new photo' },
     ];
 
     return (
